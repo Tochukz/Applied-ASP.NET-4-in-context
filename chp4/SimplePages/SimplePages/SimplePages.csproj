@@ -66,6 +66,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Default.aspx" />
     <Content Include="ThirdPage.html" />
     <Content Include="Images\triathlon.png" />
