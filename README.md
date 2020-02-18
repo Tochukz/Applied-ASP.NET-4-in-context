@@ -71,10 +71,38 @@ Useful Application Events:
 
 The _Start_ event is a good place to create resources that will be used throughout your application, and the _End_ event is a good place to ensure that they are released.
 
+### Chapter 6: Working with Forms and State  
+ASP.NET provides a range of different state mechanisms. The four most important and widely used state are: form, view, session and application.  
+Data that span multiple pages is called state. ASP.NET provided 4 forms of state:  
+1. Form input State
+2. View state
+3. Session state
+4. Application state
 
+Caution: Do not rely on the view state data for any critical application data, including anything to do with security.  
 
+To disable view state entirely for the a page we can set the _EnableViewState_ attribute of the Page directive to false, like this:  
+```
+<%@ Page Language="C#" CodeBehind="Default.aspx.cd" Inherits="SwinCalculator.Default" EnableViewState="false" %>
+```
+You can get and set data normally in your code, but the data will be quietly discarded.  
 
+You can apply the _enableviewstate_ attribute for individual controls instead of the whole page.  
+```
+<div id="results" runat="server" enableviewstate="false" />
+```
+You can disable view state for a parent control and all the children of the control will automatically have their view state disabled.   
 
+The key difference between session state and view state is that only the session identifier is included
+in the response that is sent to the client, while the data stored remains on the server.
+
+__Configure Session State__    
+Data associated with active sessions are stores in the ASP.NET server process by default. ASP.NET includes support for storing this information and data in a SQL server database. This is useful if you expect a lot of state data or you need to share the same data among multiple servers that are delivering the same application.  You can find details for setting up the database and configuring the ASP.NET framework on MSDN site.
+
+__Using Application State__  
+Application state is better suited for storing data items that don't change and that will be used throughout the life of the web application. Database connections are a prime example.  
+
+### Chapter 7: Handling Errors
 
 
 ### Chapter 32: Preparing a Server for Deployment
