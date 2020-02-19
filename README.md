@@ -103,6 +103,15 @@ __Using Application State__
 Application state is better suited for storing data items that don't change and that will be used throughout the life of the web application. Database connections are a prime example.  
 
 ### Chapter 7: Handling Errors
+__Handling Errors with the Application__   
+Any errors that are not handled by a page becomes application errors. There types of errors is handled _Application_Error()_ method of the Global application class.
+
+__Configure Custom Errors__  
+The _customErrors_ setting only controls what happens if an error is not handled by the Page and the Global class.  
+
+__Using ASP.NET Tracing__  
+For _hard failure_ something goes wrong and is expressed using an exception. For _soft failure_, there is no exception but the web application doesn't behave as it should.  
+
 
 
 ### Chapter 32: Preparing a Server for Deployment
