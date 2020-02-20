@@ -111,8 +111,34 @@ The _customErrors_ setting only controls what happens if an error is not handled
 
 __Using ASP.NET Tracing__  
 For _hard failure_ something goes wrong and is expressed using an exception. For _soft failure_, there is no exception but the web application doesn't behave as it should.  
+__Enabling Tracing__  
+To enable tracing on individual ASP.NET pages, add the _Trace="true"_ attribute to the _Page_ directive.  
+To enable tracing on all the pages in the application, add the _trace_ element to the _system.web_ element of _Web.config_ file:  
+```
+<system.web>
+  <trace enabled="true" pageOutput="true" requestLimit="50" localOnly="false" />
+</system.web>
+```
 
+__Adding Custom Trace Messages__  
+The _Page.Trace_ property returns a _System.Web.TraceContext_ object, which you can use to add statements to your code. The tow key methods from th _TraceContext_ class are _Write_ and _Warn_.  
 
+__Viewing a Trace in the Trace Viewer__
+First you must enable Trace Viewer by setting the _pageOutput_ attribute to false in the _trace_ element of the _web.config_ file:
+```
+<system.web>
+  <trace enabled="true" pageOutput="false" requestLimit="50" localOnly="false" />
+</system.web>
+```
+After interacting with the page, you can see the Trace Viewer at _http://localhost:1234/Trace.axd_  
+
+The downside of the trace viewer is that it captures every request to the ASP.NET server, and that
+can make it hard to figure out what is going on.  
+The trace viewer is at its most useful when you can minimize the number of requests that are not
+directly related to your bug hunt.
+
+__Setting a Programmatic breakpoint__  
+The ability to break the debugger comes with the _System.Diagnostics.Debugger_ class which includes the _Break_ method.
 
 ### Chapter 32: Preparing a Server for Deployment
 Visit [iis.net](http://iis.net) for best-practice information about deploying Windows Server and IIS in production environment.
