@@ -1,5 +1,6 @@
 # Applied ASP.NET 4 in Context (2011)
-By Adam Freeman
+__By Adam Freeman__  
+[Github Source Code](https://github.com/Apress/applied-asp.net-4-in-context)
 
 ## PART I: Getting Started
 
@@ -139,6 +140,20 @@ directly related to your bug hunt.
 
 __Setting a Programmatic breakpoint__  
 The ability to break the debugger comes with the _System.Diagnostics.Debugger_ class which includes the _Break_ method.
+
+### Chapter 8: Working with Data   
+
+__Managing Concurrency__  
+The Entity Framework uses an _optimistic concurrency_ model by default. In this case _optimistic_ means that we cross our finger and hope that we don't get overlapping page requests that leads to conflicting data changes.
+Database locks should never be used in a web application without a lot of careful thought and testing.  
+
+To enable concurrency checking, follow these steps:  
+1. Open the data model file i.e `.edmx` file
+2. Right-click the property that you want to modify and select Properties from the pop-up menu.  
+3. Change the value of the Concurrency Mode property to Fixed.
+Once you have enabled concurrency checking, the _SaveChanges_ method of the context object will throw a _System.Data.OptimisticConcurrencyException_ if the data you are attempting to modify has been changed since you queried the data model to obtain the entity object.  
+
+### Chapter 9: Styling Content  
 
 ### Chapter 32: Preparing a Server for Deployment
 Visit [iis.net](http://iis.net) for best-practice information about deploying Windows Server and IIS in production environment.
