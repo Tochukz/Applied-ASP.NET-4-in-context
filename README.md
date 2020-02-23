@@ -154,6 +154,12 @@ To enable concurrency checking, follow these steps:
 Once you have enabled concurrency checking, the _SaveChanges_ method of the context object will throw a _System.Data.OptimisticConcurrencyException_ if the data you are attempting to modify has been changed since you queried the data model to obtain the entity object.  
 
 ### Chapter 9: Styling Content  
+You can change the master page that a web page uses by setting a value for the _Page.MasterPageFile_ property in the handler for the _Page.PreInit_ event.
+
+__Managing a Master Page from a Web Page__    
+You can access the master page from a web page by using the _Master_ property which returns an instance of the _System.Web.UI.MasterPage_ class. You can then call the _FindControl_ method on the _MasterPage_ to locate an HTML control by name and work with it as you would any other HTML control.
+
+### Chapter 10: Adding Interactivity
 
 ### Chapter 32: Preparing a Server for Deployment
 Visit [iis.net](http://iis.net) for best-practice information about deploying Windows Server and IIS in production environment.

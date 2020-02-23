@@ -163,7 +163,7 @@
           <Key>
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Events" Relationship="Self.FK_Events_Athletes" FromRole="Athletes" ToRole="Events" />
         </EntityType>
         <EntityType Name="Event">

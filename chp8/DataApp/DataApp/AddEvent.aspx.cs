@@ -36,7 +36,7 @@ namespace DataApp
                     catch(FormatException)
                     {
                         errorDiv.InnerText = "Cannot parse inputs";
-                    }    
+                    }
                     catch(InvalidOperationException ex)
                     {
                         errorDiv.InnerText = "Invalid Operation Exception: " + ex.Message;
@@ -53,7 +53,7 @@ namespace DataApp
                     {
                         errorDiv.InnerText = string.Format("<p>{0}</p> <p>{1}</p> <p>{2}</p>", ex.InnerException.Message, ex.InnerException.StackTrace, ex.InnerException.ToString());
                     }
-            
+
                 }
             }
         }
