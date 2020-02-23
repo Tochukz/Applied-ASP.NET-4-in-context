@@ -1,0 +1,43 @@
+﻿div.standardDiv
+{
+    float: left;
+    padding: 10px;
+}
+a.tableLink {
+    color: Red;
+}
+div.columnDiv
+{
+    float: left;
+}
+div.elementDiv
+{
+    padding: 5px;
+}
+div.labelDiv
+{
+    float: left;
+    width: 80px;
+}
+select
+{
+    width: 120px;
+}
+label
+{
+    vertical-align: baseline;
+}
+td
+{
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-top: 2px;
+}
+table
+{
+    border: thin solid black;
+}
+input.inputText
+{
+    width: 110px;
+}
