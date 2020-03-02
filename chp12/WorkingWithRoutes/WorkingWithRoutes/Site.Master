@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WorkingWithRoutes.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="~/Styles/bootstrap.min.css" rel="stylesheet" />
+    <style style="text/css">
+        li {
+            display: inline-block;
+            margin:0 1.5em;
+        }
+    </style>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="jumbotron">
+                        <ul class="list-group list-unstyled">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="<asp:Literal runat="server" Text="<%$RouteUrl:RouteName=customers-page%>" />">Customers</a>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="itemsLink" runat="server" NavigateUrl="<%$RouteUrl:RouteName=items-page%>">Item Types</asp:HyperLink>
+                            </li>
+                            <li>
+                                <a id="additionLink" runat="server">Addition Page</a>
+                            </li>
+                            <li>
+                                <!--routed url with parameter inline -->
+                                <asp:Hyperlink ID="firstCustomer" runat="server" NavigateUrl="<%$RouteUrl:RouteName=customer-page,customerId=1%>">First Customer</asp:Hyperlink>
+                            </li>
+                            <li>
+                                <a id="thirdCustomer" runat="server">Third Customer</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="alert-danger" id="errorDiv" runat="server"></div>
+                    <asp:ContentPlaceHolder ID="body" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
