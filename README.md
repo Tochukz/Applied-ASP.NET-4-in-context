@@ -94,8 +94,7 @@ You can apply the _enableviewstate_ attribute for individual controls instead of
 ```
 You can disable view state for a parent control and all the children of the control will automatically have their view state disabled.   
 
-The key difference between session state and view state is that only the session identifier is included
-in the response that is sent to the client, while the data stored remains on the server.
+The key difference between session state and view state is that only the session identifier is included in the response that is sent to the client, while the data stored remains on the server.
 
 __Configure Session State__    
 Data associated with active sessions are stores in the ASP.NET server process by default. ASP.NET includes support for storing this information and data in a SQL server database. This is useful if you expect a lot of state data or you need to share the same data among multiple servers that are delivering the same application.  You can find details for setting up the database and configuring the ASP.NET framework on MSDN site.
@@ -160,8 +159,94 @@ __Managing a Master Page from a Web Page__
 You can access the master page from a web page by using the _Master_ property which returns an instance of the _System.Web.UI.MasterPage_ class. You can then call the _FindControl_ method on the _MasterPage_ to locate an HTML control by name and work with it as you would any other HTML control.
 
 ### Chapter 10: Adding Interactivity
+__Using jQuery UI__  
+Maybe continued later...
+
+### Chapter 12: Working with Routes
+Done... Review some parts later
+
+## PART III: Using Web Forms  
+
+### Chapter 13: Putting Web Forms in Context  
+Web Forms is essentially a set of user interface controls that build on the core ASP.NET framework state and event features to simulate the stateful and event-driven Windows Forms equivalents.    
+Web Forms is ideal for developing applications that are delivered over the Web, but that are not
+deeply connected to the underlying web technologies.
+
+__Web Form Weaknesses__
+* Poor Maintainability  
+* Poor Unit Testability  
+* Bandwidth-Heavy View State  
+* Inflexibility  
+* Low Developer Mindshare  
+
+__Deciding When to Use Web Forms__  
+Web Forms can be extremely useful if you have a project with the following requirements:   
+* Speed of development  
+* Intranet development  
+* Short life or low expectations of change  
+
+### Chapter 14: Working with the Web Forms Designer  
+__Creating UI Control Event Handlers__  
+The Web Forms UI controls implement events that are focused on individual controls. The core events that are common to all Web Forms UI controls are:  
+* Init  
+* Load  
+* PreRender
+* Unload
+* Disposed
+* DataBinding  
+These events corresponds to the page-level events introduced in Chapter 5 but apply to a specific control. The additional events available differ from control to control.  
+
+Both the _Click_ and the _Command_ events are invoked when the Button control is clicked. The difference us that the _Command_ event makes it easier to implement a single handler method that can process events from multiple controls, potentially of different types. 
+
+
+## PART V: Wrapping Up
 
 ### Chapter 32: Preparing a Server for Deployment
 Visit [iis.net](http://iis.net) for best-practice information about deploying Windows Server and IIS in production environment.
 
 Step 1: Enable the Web Server(IIS) role on Windows Server.
+Ensure that the following services are checked:  
+* ASP.NET (in the Application Development category)  
+* Management Service (in the Management Tools category)  
+
+Step 2: Use WebPI on the server to obtain and install additional software components:
+* .NET Framework version 4
+* Web Deploy Tool 2.0  
+
+__Understanding Virtual Directories__    
+Each virtual directory can be marked as an independent application, in which case it gets its own separate application configuration and state. It can even run a different version of ASP.NET than its parent web site.
+
+__Understanding Application Pools__   
+Each pool runs a separate worker process which can run under a different identity (affecting it level of permission to access the underlying OS) and defined rules for maximum memory usage, maximum COU usage, process-recycling schedules and so on.  
+If one application crashes, then the web server itself and application in other app pools won't be affected.   
+
+### Chapter 33: Deploying an ASP.NET Application  
+If you want to learn more about IIS, then I recommend
+looking at the extensive documentation available at [www.iis.net](http://iis.net).  
+
+__Preparing for Deployment__  
+Deployment is the same for all types of ASP.NET application, with a couple of exceptions.  
+
+__Preparing the Web.config File for Transformation__  
+The _Web.config_ transformations are applied only when deploying the application using certain techniques. The transformations are not applied when doing a regular build in Visual Studio.  
+
+__Preparing for Bin Deployment (MVC Framework Only)__  
+We do this by performing what is called a _bin deployment_, so-called because the libraries are included in the _bin_ directory of the project.  This is to ensure that our application can run successfully whether or not the ASP.NET assembles have been installed by the server's administrators.  
+
+__Deploying an Application by Copying Files__  
+This is the most basic way to deploy an application.  
+We need to copy the following files from the project on our development machine.   
+* The compile .NET assemblies (which are in the _/bin_ folder)
+* Configuration files(_Web.config_ and _Global.asax_)
+* Static files (including images, CSS files and JS files)
+We need to maintain the structure of the project.    
+For security reason, DO NOT copy  
+* C# code files (_*.cs_, _Global.asax_ and other code-behind files)  
+* Project and solution files (_*.sln_, _*.suo_, _*.csproj_ or _*.csproj.user_)
+* The _\obj_ folder
+* source control directories (_.svn_, _.hg_ or _.git_)  
+The first request to the server can take a while to complete.  
+
+__Using a Deployment Package__  
+A _deployment package_ is a zip file containing the application files.  Visual studio generates the package for us.   
+Deplyment packages support _Web.config_ transformation and database deployment.  

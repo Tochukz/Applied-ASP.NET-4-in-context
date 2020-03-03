@@ -1,0 +1,18 @@
+﻿body {
+}
+input {
+    margin: 5px;
+}
+span {
+    text-align: right;
+    margin: 5px;
+    width: 100px;
+    height: 5px;
+    float: left;
+    clear: left;
+}
+.result {
+    margin: 10px;
+    font-weight: bold;
+    color: #ff0000;
+}
