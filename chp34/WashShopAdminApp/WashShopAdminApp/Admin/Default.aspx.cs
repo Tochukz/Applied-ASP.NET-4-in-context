@@ -9,9 +9,10 @@ namespace WashShopAdminApp.Admin
 {
     public partial class Default : System.Web.UI.Page
     {
+        protected string Username;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Username = Session["username"] as string;
         }
     }
 }

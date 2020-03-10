@@ -27,7 +27,7 @@ namespace WashShopAdminApp.DAL
                             result = new DataTable();
                             dataAdapter.Fill(result);
                         }
-                        if (password.Trim() == result.Rows[0]["password"].ToString().Trim())
+                        if (result.Rows.Count > 0 && password.Trim() == result.Rows[0]["password"].ToString().Trim())
                         {
                             return true;
                         }
@@ -56,7 +56,7 @@ namespace WashShopAdminApp.DAL
                     using (SqlCommand cmd = con.CreateCommand())
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "select roles form Users where username = @uname";
+                        cmd.CommandText = "select roles from Users where username = @uname";
                         cmd.Parameters.Add(new SqlParameter("@uname", username));
                         using (SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd))
                         {
@@ -70,6 +70,10 @@ namespace WashShopAdminApp.DAL
                         }
                     }
                 }
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
             }
             catch(Exception ex)
             {

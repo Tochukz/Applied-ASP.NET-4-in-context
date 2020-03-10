@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            Welcome Admin
+            <h3>Welcome <%=Username %></h3>
         </div>
     </form>
 </body>
