@@ -310,3 +310,8 @@ You may implement tour own web-vased administrative UI, which internally calls m
 
 __Setting Up and Using Roles__  
 Just as with membership, the ASP.NET platform expects us to work with roles through its provider model offering a common API, the _RoleProvider_ base class and a set o built-in providers you can choose from. And of course, we can implement out own custom provider.  
+
+For custom Authentication take a look at the articles:  
+* [Article 1](https://www.c-sharpcorner.com/UploadFile/fa9d0d/forms-authentication-in-Asp-Net/)
+* [Article 2](http://rahulrajatsingh.com/2014/06/understanding-and-implementing-asp-net-custom-forms-authentication/)
+* [Article 3](http://rahulrajatsingh.com/2014/11/a-beginners-tutorial-on-custom-forms-authentication-in-asp-net-mvc-application/)
