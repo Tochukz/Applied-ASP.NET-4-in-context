@@ -54,6 +54,50 @@
             $('#<%=monthSelect.ClientID%>').change(function () {
                 $('#<%=dayInput.ClientID%>').valid();
             }); // calling the valid() method on an input element performs validation on the input element.
+
+            /* Using jQuery UI on a button. Calling button() function on the selected button converts it to a JQeuery UI button */
+            $('input:submit').button().css({ 'width': 75, 'height': 35 });
+
+            $('input:submit').parent().append('<button>Cancel</button>')
+                             .find('button').button().css({ 'width': 75, 'height': 35 })
+                             .click(function () { document.location = '/ListEvents.aspx' });
+
+            /* For the date picker */
+            // get the three fields we are working with
+            var dayField = $('#<%=dayInput.ClientID %>');
+            var monthField = $('#<%=monthSelect.ClientID %>');
+            var yearField = $('#<%=yearInput.ClientID %>');
+            // get the parent that contains the date fields and add a new label and field
+            var parentDiv = $(dayField).parent().parent();
+            // insert the new field and label
+            parentDiv.prepend('<div class="elementDiv"><div class="labelDiv">Date:</div>' +
+                '<input class="inputText" type="text" id="dateText"/></div>');
+            // set the intial value of the combined field
+            $('#dateText').val(jQuery.validator.format('{0}/{1}/{2}',
+                $(monthField).find('option:selected').index(),
+                dayField.val(), yearField.val()));
+            // hide the original fields
+            dayField.parent().hide();
+            monthField.parent().hide();
+            yearField.parent().hide();
+            // move the event type input to the left-most column
+            parentDiv.append($('#<%=eventTypeSelect.ClientID %>').parent().remove());
+            // register a date picker on the field
+            $('#dateText').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '2010:2012',
+                selectOtherMonths: true,
+                selectOtherYears: true,
+                onClose: function (dateText, instance) {
+                    // get the selected date and split it
+                    var dateElements = $(this).val().split('/');
+                    monthField.find('option[index=' + (dateElements[0] - 1) + ']').attr('selected', 'selected');
+                    dayField.val(dateElements[1]);
+                    yearField.val(dateElements[2]);
+                }
+            });
+
         });
     </script>
 </asp:Content>
@@ -61,10 +105,11 @@
     <div class="error" id="errorDiv" runat="server"></div>
     <div class="standardDiv">
         <div class="columnDiv elementDiv">
-            <p>Month:</p>
+           <!--<p>Month:</p>
             <p>Day:</p>
             <p>Year:</p>
             <p>Athlete</p>
+            <p>Event Type:</p>-->
         </div>
         <div class="columnDiv elementDiv">
             <p>
@@ -77,19 +122,21 @@
                 <input type="text" id="yearInput" runat="server" />
             </p>
             <p>
+                <span style="margin-right: 43px">Athlete</span>
                 <select id="athleteSelect" runat="server" />
             </p>
         </div>
     </div>
     <div class="standardDiv">
         <div class="columnDiv elementDiv">
-            <p>Event Type:</p>
+            
             <p>Swim:</p>
             <p>Cycle:</p>
             <p>Run:</p>
         </div>
         <div class="columnDiv elementDiv">
             <p>
+                <span  style="margin-right: 23px">Event Type:</span>
                 <select id="eventTypeSelect" runat="server" />
             <p>
                 <input type="text" id="swimTimeInput" runat="server" placeholder="00:35:33" />

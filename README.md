@@ -196,7 +196,15 @@ The Web Forms UI controls implement events that are focused on individual contro
 * DataBinding  
 These events corresponds to the page-level events introduced in Chapter 5 but apply to a specific control. The additional events available differ from control to control.  
 
-Both the _Click_ and the _Command_ events are invoked when the Button control is clicked. The difference us that the _Command_ event makes it easier to implement a single handler method that can process events from multiple controls, potentially of different types. 
+Both the _Click_ and the _Command_ events are invoked when the Button control is clicked. The difference us that the _Command_ event makes it easier to implement a single handler method that can process events from multiple controls, potentially of different types.  
+
+### Chapter 15: Working With Forms controls
+You could work directly with the HTML elements, but the value of the Web Forms controls is that you can benefit from the Web Forms property and event support. You can easily configure the controls using property sheets, and also create and register event-handling methods. Another benefit is that you can work with these controls programmatically.  
+
+__Working with Controls Programmatically__  
+When working with a Web Forms control, you have programmatic access to all of the properties Visual Studio shows in the properties window when you use the design surface.  
+
+To be continued.
 
 
 ## PART V: Wrapping Up
@@ -250,3 +258,55 @@ The first request to the server can take a while to complete.
 __Using a Deployment Package__  
 A _deployment package_ is a zip file containing the application files.  Visual studio generates the package for us.   
 Deplyment packages support _Web.config_ transformation and database deployment.  
+
+
+### Chapter 34: Authentication and Authorization  
+__Using Windows Authentication__  
+With Windows Authentication, we essentially inherit whatever authentication system our Windows server is configured to use, including complex Active Directory deployment. We enable Windows Authentication in our application's _Web.config_ as shown:
+```
+<configuration>
+  <system.web>
+    <authentication mode="Windows" />
+  </system.web>
+</configuration>
+```
+When we use Windows Authentication, ASP.NET relies on IIS to authenticate requests from users. IIS in turn uses one of the modes:  
+* Anonymous Authentication  (Allows access to all users)
+* Basic Authentication  (Credentials are sent as plain text. Should be only used over an SSL connection )
+* Digest Authentication  (Uses a cryptographic secure hash code. Only works when the server is a domain controller)
+* Windows Authentication  (Identity of the user is established through the Windows domain. The server and client must be in the same domain or in domains that have a trust relationship)  
+
+_Windows Authentication_ is suited for application deployed on a corporate intranet within an organization's established domain infrastructure.  
+_Form Authentication_ is ideally suited for internet-facing applications.  
+
+__Using Form Authentication__   
+The security of Forms Authentication relies on an encrypted browser cookie called _.ASPXAUTH__.  
+Using _FormsAuthentication.Decrypt_ to decrypt the cookie returns a _FormAuthenticationTicket_ object.  
+
+__NB:__ When deploying an application that uses _Forms Authentication_ to a farm of servers, we must either ensure that requests always go back to the server that generated the cookie (known as _affinity_) or ensure that all of the server have the same machine keys. Keys can be generated and configured using the Machine Keys option n IIS Manager (the icon is in the ASP.NET section).   
+
+Enabling Forms Authentication in _Web.Config_  
+```
+<configuration>
+  <system.web>
+    <authentication mode="Forms">
+      <forms loginUrl="~/Account/LogOn" timeout="2880" />
+    </authentication>
+  </system.web>
+</configuration>
+```  
+Alternatively, you can configure _Forms Authentication_ using the Authentication option in the IIS Manager tool.  
+
+__Using Membership, Roles and Profiles__  
+There are three key functional areas:  
+* _Membership_, which is about registration  
+* _Roles_, which groups uses for authorization purposes.  
+* _Profiles_, for storage of users' preferences.   
+
+__Managing Membership__
+You may implement tour own web-vased administrative UI, which internally calls methods of the _Memebership_ API to let site administrators manage the user account database or use one of the platform's two built-in administration UIs:  
+* _Website Administration Tool_ (WAT)
+* _IIS .NET Users_ tool
+
+__Setting Up and Using Roles__  
+Just as with membership, the ASP.NET platform expects us to work with roles through its provider model offering a common API, the _RoleProvider_ base class and a set o built-in providers you can choose from. And of course, we can implement out own custom provider.  

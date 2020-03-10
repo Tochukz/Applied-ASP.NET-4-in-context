@@ -34,22 +34,23 @@
             $('input:submit').hide();
 
             /* Convert all links in the page to buttons */
-            var counter = 0;
+
+            /* var counter = 0;
             $('a').each(function () {
                 var labelText = $(this).text();
                 var targetURL = $(this).attr('href');
                 var buttonID = 'newButton' + counter++;
 
                 /* create the button */
-                $(this).replaceWith("<button id='" + buttonID + "'>" + labelText + "</button>");
+               // $(this).replaceWith("<button id='" + buttonID + "'>" + labelText + "</button>");
 
                 // select the newly created button and bind to it
-                $('#' + buttonID).click(function () {
+               /* $('#' + buttonID).click(function () {
                     window.location = targetURL;
                     // we return false to stop the browser default handling of the event which is to submit the form. And also stop futher propagation of the event.
                     return false;
                 })
-            });
+             }); */
 
             // Highlight the row when the user hover with his mouse
             $('tr:has(td)').hover(
@@ -62,6 +63,17 @@
             ).click(function () {
                 $(this).find('td button:contains("Edit")').click();
             });
+
+            /* Converting a link to jQuery UI Button */
+            $('a').button().css('color', '#ffffff');
+            $('td a').css('font-size', 'smaller');
+
+        /* Replace the select element with a combo box. This is powered by the combobox.js script*/
+            // This is not working as expected
+            //$("#<%=eventSelector.ClientID%>").combobox();
+            //$("#comboBoxInput").css('height', $('#comboBoxButton').height() - 2).width('100px');
+
+
         });
     </script>
 </asp:Content>

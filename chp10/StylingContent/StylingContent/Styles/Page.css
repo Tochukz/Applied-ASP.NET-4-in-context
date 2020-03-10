@@ -1,11 +1,22 @@
-﻿div.standardDiv
+﻿
+.smallButton 
+{
+    font-size: small;
+    color: #ffffff;
+}
+
+div.standardDiv
 {
     float: left;
     padding: 10px;
 }
-a.tableLink {
+
+a.tableLink
+{
     color: Red;
 }
+    
+
 div.columnDiv
 {
     float: left;
@@ -40,7 +51,4 @@ table
 input.inputText
 {
     width: 110px;
-}
-.error {
-    color: orangered
 }

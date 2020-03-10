@@ -42,6 +42,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>&lt;Objects xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;&lt;ObjectGroup Name="TrainingDataEntities-Deployment" Order="1" Enabled="True"&gt;&lt;Destination Path="Data Source=TOCHUKWUN\CHUCKSDB%3bInitial Catalog=triathlon%3bIntegrated Security=True" /&gt;&lt;Object Type="DbFullSql"&gt;&lt;PreSource Path="Data Source=%28LocalDB%29\MSSQLLocalDB%3bAttachDbFilename=&amp;quot%3bC:\Users\bbdnet2119\source\repos\Applied ASP-dot-NET-4-in-context\TrainingData\TrainingData.mdf&amp;quot%3b%3bIntegrated Security=True%3bMultipleActiveResultSets=True%3bConnect Timeout=30%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" /&gt;&lt;Source Path="obj\Release\AutoScripts\TrainingDataEntities-Deployment_SchemaAndData.sql" Transacted="True" /&gt;&lt;/Object&gt;&lt;/ObjectGroup&gt;&lt;/Objects&gt;</PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -135,14 +136,17 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\Deploy To File System.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Images\triathlon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\combobox.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
@@ -167,6 +171,22 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="Styles\images\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+    <Content Include="Styles\images\ui-bg_diagonals-thick_15_444444_40x40.png" />
+    <Content Include="Styles\images\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+    <Content Include="Styles\images\ui-bg_glass_55_fbf5d0_1x400.png" />
+    <Content Include="Styles\images\ui-bg_highlight-hard_30_007f7f_1x100.png" />
+    <Content Include="Styles\images\ui-bg_highlight-soft_33_007f7f_1x100.png" />
+    <Content Include="Styles\images\ui-bg_highlight-soft_50_007f7f_1x100.png" />
+    <Content Include="Styles\images\ui-bg_highlight-soft_60_007f7f_1x100.png" />
+    <Content Include="Styles\images\ui-bg_inset-soft_10_007f7f_1x100.png" />
+    <Content Include="Styles\images\ui-icons_4eb305_256x240.png" />
+    <Content Include="Styles\images\ui-icons_72b42d_256x240.png" />
+    <Content Include="Styles\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Styles\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Styles\jquery-ui.min.css" />
+    <Content Include="Styles\jquery-ui.structure.min.css" />
+    <Content Include="Styles\jquery-ui.theme.min.css" />
     <Content Include="Styles\Page.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="TrainingModel.Context.tt">
