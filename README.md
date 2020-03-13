@@ -202,9 +202,30 @@ Both the _Click_ and the _Command_ events are invoked when the Button control is
 You could work directly with the HTML elements, but the value of the Web Forms controls is that you can benefit from the Web Forms property and event support. You can easily configure the controls using property sheets, and also create and register event-handling methods. Another benefit is that you can work with these controls programmatically.  
 
 __Working with Controls Programmatically__  
-When working with a Web Forms control, you have programmatic access to all of the properties Visual Studio shows in the properties window when you use the design surface.  
+When working with a Web Forms control, you have programmatic access to all of the properties Visual Studio shows in the properties window when you use the design surface.    
 
-To be continued.
+__Using the TreeView Control__  
+You can use the _TreeView_ web controller or
+_jQuery Tree View Plugin_.   
+_TreeView_ control is perfectly usable if you don’t need events, but I would suggest using the jQuery alternative if events are important.
+
+__Using the SiteMapPath Control__  
+Todo::
+Return to make SiteMapPage.aspx work as it should
+
+The _jQuery UI_ calendar is recommended over the _Calendar_ Web Control.  
+
+The _[jQuery FormToWizard]()_ plug-in is recommended over the _Wizard_ Web Control.  
+
+__Cool Stuff__  
+You can easily create  finite an infinity cyclic iteration using the modulus operator.  
+Say I want to output the numbers 0, 1, 2, 0, 1, 2, 0, 1 etc:
+```
+for(x=0; x<1000; x++){
+  console.log(x % 3)
+}
+```
+To get cyclic number of 0, 1, 2, 3, 0, 1, 2, 3 etc just change the denominator to 4 like this `console.log(x % 4)` 
 
 
 ## PART V: Wrapping Up
