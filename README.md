@@ -225,9 +225,12 @@ for(x=0; x<1000; x++){
   console.log(x % 3)
 }
 ```
-To get cyclic number of 0, 1, 2, 3, 0, 1, 2, 3 etc just change the denominator to 4 like this `console.log(x % 4)` 
+To get cyclic number of 0, 1, 2, 3, 0, 1, 2, 3 etc just change the denominator to 4 like this `console.log(x % 4)`
 
-
+### Chapter 16: Customizing Web Form Controls
+__Creating a User Control__  
+_User Controls_ can be helpful when you have a block of markup that you want to use throughout your application.
+_User Controls_ are `.ascx class` files.   
 ## PART V: Wrapping Up
 
 ### Chapter 32: Preparing a Server for Deployment
@@ -335,4 +338,9 @@ Just as with membership, the ASP.NET platform expects us to work with roles thro
 For custom Authentication take a look at the articles:  
 * [Article 1](https://www.c-sharpcorner.com/UploadFile/fa9d0d/forms-authentication-in-Asp-Net/)
 * [Article 2](http://rahulrajatsingh.com/2014/06/understanding-and-implementing-asp-net-custom-forms-authentication/)
-* [Article 3](http://rahulrajatsingh.com/2014/11/a-beginners-tutorial-on-custom-forms-authentication-in-asp-net-mvc-application/)
+* [Article 3](http://rahulrajatsingh.com/2014/11/a-beginners-tutorial-on-custom-forms-authentication-in-asp-net-mvc-application/)  
+
+
+## Simple Apps  
+### Email App  
+Form to mail or app useful as contact form on website contact us page.
