@@ -68,7 +68,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Calendar.aspx" />
-    <Content Include="SiteMapPage.aspx" />
     <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
@@ -130,13 +129,6 @@
       <DependentUpon>Navigation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SiteMapPage.aspx.cs">
-      <DependentUpon>SiteMapPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SiteMapPage.aspx.designer.cs">
-      <DependentUpon>SiteMapPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Wizard.aspx.cs">
       <DependentUpon>Wizard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -227,9 +227,30 @@ for(x=0; x<1000; x++){
 To get cyclic number of 0, 1, 2, 3, 0, 1, 2, 3 etc just change the denominator to 4 like this `console.log(x % 4)`
 
 ### Chapter 16: Customizing Web Form Controls
+There are four ways to customize the Web Form controls system:  
+1. User Controls
+2. Control Templates  
+3. Control Adapters
+4. Custom Controls  
+You can use these features to get fins-grained control over the HTMLL that is emitted and the properties and events that are defined - all while still getting the benefits of the Web Forms design tools.
+
 __Creating a User Control__  
 _User Controls_ can be helpful when you have a block of markup that you want to use throughout your application.
 _User Controls_ are `.ascx class` files.   
+
+__Using Control Templates__  
+Some Web Controls that support templates includes _Menu_, _SiteMapPath_, and _Wizard controls_.   
+Many of the other template-enabled controls, such as _GridView_ and _ListView_ are rich data controls.
+
+__Using Control Adapters__  
+A _control adapter_ is a mechanism designed to deal with differences between browsers, but we can co-opt it to gain wider influence over a control.  
+To create a _control adapter_, we must override three methids from the _WebControlAdapter_ class: _RenderBeginTag_, _RenderEndTag_, and _RenderContents_.
+
+__Creating Custom Controls__  
+You can group and extend existing web controls using _user control_ and you can take responsibility for the HTML that a control renders using an _adapter_. But if you want to create an entirely new kin of element, then you need to create a _custom server control_.  
+
+### Chapter 17: Validating Form Data
+
 ## PART V: Wrapping Up
 
 ### Chapter 32: Preparing a Server for Deployment
