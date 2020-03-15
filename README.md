@@ -210,8 +210,7 @@ _jQuery Tree View Plugin_.
 _TreeView_ control is perfectly usable if you don’t need events, but I would suggest using the jQuery alternative if events are important.
 
 __Using the SiteMapPath Control__  
-Todo::
-Return to make SiteMapPage.aspx work as it should
+The SiteMapPath control seems to only work when used in the default page.  
 
 The _jQuery UI_ calendar is recommended over the _Calendar_ Web Control.  
 

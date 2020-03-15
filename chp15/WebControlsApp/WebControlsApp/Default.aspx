@@ -8,6 +8,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+
         <div id="myDiv" runat="server"></div>
         <asp:Panel ID="myPanel" runat="server"></asp:Panel>
         <div id="results" runat="server"></div>

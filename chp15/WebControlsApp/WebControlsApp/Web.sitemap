@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
-  <siteMapNode url="~/Default.aspx" title="Home"  description="">
-    <siteMapNode url="~/Bubble.aspx" title="Bubble"  description="" />
-    <siteMapNode url="/List.aspx" title="Link"  description="" />
+  <siteMapNode url="~/Main.aspx" title="Triathlon">
+    <siteMapNode url="~/Data.aspx" title="Race Data">
+      <siteMapNode url="~/Default.aspx" title="Lastest Data"  description="" />
+    </siteMapNode>
+    <siteMapNode url="~/People.aspx" title="Athletes"/>
   </siteMapNode>
 </siteMap>

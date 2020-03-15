@@ -37,6 +37,9 @@
                 </Nodes>
             </asp:TreeView>
             
+            <!--Site Map seems to work only on the Default.aspx page-->
+            <asp:SiteMapPath ID="SiteMapPath1" runat="server"></asp:SiteMapPath>
+
             <div id="results" runat="server"></div>
         </div>
     </form>
