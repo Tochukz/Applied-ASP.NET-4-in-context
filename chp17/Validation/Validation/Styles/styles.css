@@ -1,0 +1,37 @@
+﻿body {
+}
+
+input {
+    float: left;
+}
+
+span.label {
+    margin: 5px;
+    height: 20px;
+    text-align: right;
+    float: left;
+    clear: left;
+    width: 100px;
+}
+
+span.validation {
+    margin: 5px;
+    font-weight: bold;
+    color: Red;
+    float: left;
+}
+
+div.validation {
+    margin: 2px;
+    font-weight: bold;
+    color: Red;
+    float: left;
+    padding: 2px 10px 0px 10px;
+    border: thin solid red;
+}
+
+.results {
+    clear: left;
+    font-weight: bold;
+    margin: 10px;
+}
