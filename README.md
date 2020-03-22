@@ -7,15 +7,22 @@ __By Adam Freeman__
 ### Chapter 1: Introduction
 
 ### Chapter 2: Getting Ready
+__Tools To Install__
+* Visual studio
+* Microsoft Web Platform Installer
+* Microsoft SQL Server
+* Internet Information Services (IIS)
+* SQL Server Management Studio
+* _Ninject_ for Dependency Injection ([Ninject.org.](Ninject.org))
 
 ### Chapter 3: Putting ASP.NET in Context  
 __The Structure of ASP.NET__  
-ASP.NET has a base called the Core ASP.NET Platform.
+ASP.NET has a base called the _Core ASP.NET Platform_.
 On top of the core is the _Web Forms_ and the _MVC framework_ which sits side by side.  
 You'll need to master the core ASP.NET features to get the most out of both the Web Forms and the MVC framework.  
-The set of features that the core platform supports is extensive and the can be used to create web applications in their own right.  
+The set of features that the core platform supports is extensive and they can be used to create web applications in their own right.  
 
-__Web Webforms__
+__Web Webforms__  
 There are three major drawbacks of Webforms:
 1. The embedded data to maintain state may impact performance for large application.  
 2. Unit testing is impossible though integration testing can be done.

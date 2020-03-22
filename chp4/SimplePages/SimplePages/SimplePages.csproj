@@ -70,7 +70,7 @@
     <Content Include="Default.aspx" />
     <Content Include="ThirdPage.html" />
     <Content Include="Images\triathlon.png" />
-    <Content Include="SecondPage.aspx" />
+    <Content Include="UsingCodeBlock.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

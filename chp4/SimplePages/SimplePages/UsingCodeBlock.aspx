@@ -1,17 +1,17 @@
 ﻿<%@ Page Language="c#" %>
 <script runat="server">
-  protected string GetImageName() {
-     return "Images/triathlon.png";
-  }
-protected string GetImageAlt() {
-  return "Triathlon Symbol";
-}
+    protected string GetImageName() {
+        return "Images/triathlon.png";
+    }
+    protected string GetImageAlt() {
+        return "Triathlon Symbol";
+    }
 </script>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>Using Code Block</title>
 </head>
 <body>
      <div>
@@ -23,14 +23,6 @@ protected string GetImageAlt() {
                }
             %>
         </ul>
-    </div>
-    <div>
-        Here are some things I like to do:  
-        <ol>
-            <li>Swim</li>
-            <li>Cycle</li>
-            <li>Run</li>
-        </ol>
     </div>
     <div>
         Here are Images:  
@@ -54,15 +46,6 @@ protected string GetImageAlt() {
        <%
           =System.Web.HttpRuntime.CodegenDir
        %>
-    </div>
-    <div>
-        Here are some colors I like:  
-        <ul>
-            <li>Green</li>
-            <li>Yellow</li>
-            <li>Red</li>
-            <li>Blue</li>
-        </ul>
     </div>
 </body>
 </html>
