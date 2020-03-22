@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Athletes>
+  <Athlete Rank="Winner">
+    <name>Joe Smith</name>
+    <city>New York</city>
+  </Athlete>
+  <Athlete Rank="Runner-Up">
+    <name>Adam Freeman</name>
+    <city>London</city>
+  </Athlete>
+</Athletes>

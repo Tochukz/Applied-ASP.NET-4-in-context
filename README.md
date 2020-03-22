@@ -141,6 +141,44 @@ __Setting a Programmatic breakpoint__
 The ability to break the debugger comes with the _System.Diagnostics.Debugger_ class which includes the _Break_ method.
 
 ### Chapter 8: Working with Data   
+__Creating an Entity Framework Data Model__
+1. Right click on your project > `Add` > `New Item`
+2. Select _Data_ category on the left and select the _ADO.NET
+Entity Data Model_ template on the right.
+3. By Convention, the file name should be _YourAppNameModel.edmx_  
+4. Select `EF Designer From Database` option from the _Entity Data Model Wizard_. (It is assumed that you already have an existing database or _.mfd_ file if you select this option)
+5. Click `Next` > `New Connection...`
+6. Make sure you have _Microsoft SQL Server Database File (SqlClient)_ unuder `Data Source` because we are using a `.mdf` data file in this case.
+7. Click the `Browse...` and select your existing `.mdf` file.
+8. Select _Use Windows Authentication_ if the SQL Server Instance is on the same machine or _Use SQL Server Authntication_ if otherwise. Click `Ok`
+9.  Make sure the  _Save connection settings in Web.config as:_ checkbox is checked so that the connection string is preserved in your _Web.config_ file. Click `Next`
+10. A prompt may pop up asking you if you want to included the `.mdf` file to your project (if it is not already in your project). You may click `Yes` or `No`. I click `Yes` and the `.mdf` file was added to my project's `App_Data` folder.
+11. Select your desired version of Entity Framework and click `Next`  
+12. Select the database objects(table, store procedures, views, etc) that you want to include in your model.
+13. Make sure the following checkboxes are checked:
+  * _Pluralize or singularize generate object namespace_
+  * _Include foreign key columns in the model_  
+  * _Include selected Stored Procedure in the model_  
+Click `Finish`
+14. Click `Ok` on all the prompt asking if you want to run the database file.
+15. At the end you should find _YourAppName.edmx_ item in you project. And under it is you  should find the following items:
+  * `YourAppName.Context.tt`
+  * `YourAppName.Designer.cs`,
+  * `YourAppName.edmx.diagram`
+  * `YourAppName.tt`
+16. The _EntityFramework_ and it'd dependencies will be added to you list of _References_
+
+__Viewing the Entity Data Model__  
+Double click the `YourAppname.edmx` file to view your data model diagram. Each rectangular box in the diagram represents a generated _entity class_ which maps to a database table of the same name.
+
+__Importing the Stored Procedures__
+To make the imported stored procedures available for use in the application, we create a new entity type that will represent the result of calling the stored procedure. To do this:
+1. Double click on the `ModelName.edmx` file to expose the Diagram
+2. On the canvas of the diagram, right click > `Add New` > `Function Import..`
+3. On the _Add Function Import_ window, enter a name for the function and select a stored procedure.
+4. Click on the _Get Column Information_ button
+5. Select a Complex type and click okay.
+6. Save all the changes
 
 __Managing Concurrency__  
 The Entity Framework uses an _optimistic concurrency_ model by default. In this case _optimistic_ means that we cross our finger and hope that we don't get overlapping page requests that leads to conflicting data changes.
@@ -250,6 +288,60 @@ __Creating Custom Controls__
 You can group and extend existing web controls using _user control_ and you can take responsibility for the HTML that a control renders using an _adapter_. But if you want to create an entirely new kin of element, then you need to create a _custom server control_.  
 
 ### Chapter 17: Validating Form Data
+__Using Server-Side Validation__  
+You don't need to take additional steps to enable server-side validation. It is done automatically; once you use the validation controls the validation applied to client side using JavaScript is also applied on the server-side. You can see this by turning off JavaScript on your browser.
+
+__Creating a Custom Validation Function__
+For custom validation, you need to implement your validation login twice: one in C# so that it can be applied at the server, and once in JavaScript so that it can be applied in the client.  
+
+### Chapter 18: Using Web Forms Data Sources  
+To work with Webform data control you need:
+* some data,
+* a data source control, and
+* a data-bound UI control.
+
+There are different kind of data sources available to deal with different kind of data.
+The _LinqDataSource_ control works with an array of objects.
+The _LinqDataSource_ control applies a LINQ query to an enumeration of C# objects.  
+
+The most commonly used data sources includes:  
+1. _LinqDataSource_ for any LINQ compatible collection such as an `IEnumerable` sequence.
+2. _SqlDataSource_ for data access using SQL directly.
+3. _EntityDataSource_ for working with Entity Framework.
+
+To enable sorting on an _EntityDataSource_ control, set the _AutoGeneratedWhereClause_ property to true.
+
+__Using LINQ Query Result As Data Source__
+Web Forms data sources are initialized before any of the page events are invoked. For this reason, we can not assign value to a field for _LinqDataSource_ in the _Page_PreInit_ or _Page_Init_ page event methods as it will be too late.
+Because of this, we can not change the nature of the LINQ query in response to the state of the page, which we would ideally do in the _Page_Load_ method.  
+
+There are two approaches to make data accessible to webform UI control:  
+1. Using data source controls  
+2. Using Code Behind class to perform LINQ Query
+
+### Chapter 19: Using Web Forms Data Binding  
+There are three categories of data-bound controls:
+1. Basic
+2. Navigation
+3. Rich data controls
+
+
+## PART IV: Using the MVC Framework
+
+### Chapter 22: Putting MVC in context
+Story. Can be read any time.
+
+### Chapter 23: A First MVC Application  
+The _Global.asax_ and _Web.config_ files pay the same role for Web Form and MVC application, although there may be slightly different content.   
+
+Notice that there are two _Web.config_ files: _~/Web.config_ and _~/Views/Web.config_ . The second one of these configures Razor.  
+
+To Continue from "Creating the controller"...
+
+__Creating the Domain Model__  
+There are two kinds of models: _domain model_ and _view model_.  
+It is common practice to create a separate class library project for the domain model and add it as a reference to the MVC framework project. The idea is that this helps enforce the separation between the domain model and the rest of the application.
+
 
 ## PART V: Wrapping Up
 
