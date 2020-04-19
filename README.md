@@ -340,18 +340,42 @@ All that is required is an _ItemTemplate_, all other template of the_ListView_ i
 ## PART IV: Using the MVC Framework
 
 ### Chapter 22: Putting MVC in context
-Story. Can be read any time.
+Stories. Can be read anytime.
 
 ### Chapter 23: A First MVC Application  
 The _Global.asax_ and _Web.config_ files pay the same role for Web Form and MVC application, although there may be slightly different content.   
 
 Notice that there are two _Web.config_ files: _~/Web.config_ and _~/Views/Web.config_ . The second one of these configures Razor.  
 
-To Continue from "Creating the controller"...
-
 __Creating the Domain Model__  
 There are two kinds of models: _domain model_ and _view model_.  
-It is common practice to create a separate class library project for the domain model and add it as a reference to the MVC framework project. The idea is that this helps enforce the separation between the domain model and the rest of the application.
+It is common practice to create a separate class library project for the domain model and add it as a reference to the MVC framework project.  
+The idea is that this helps enforce the separation between the domain model and the rest of the application. This may be a good idea for a real project but for a simple project it is okay to define the domain model within the MVC project.  
+
+__Creating the Repository__    
+We don't want to include the code that retrieves and modify data in the controller class because we don't want to create a dependency between the controller and the domain model. To ensure the separation of concern, we use a _repository_, which is an abstract class or an interface that provides the means to work with the persistent data but doesn't say anything about how the data is operated on.  
+
+__Using the Repository__  
+The _ViewBag_ is a feature that allows us to pass data from the controller to the view. The _ViewBag_ property returns a _dynamic_ object.   
+
+__Handling the Form POST__  
+The convention is to use a _view model_ to pass the main data item that the view s responsible for displaying and use _ViewBag_ to pass supporting data. Using a _view model_ alows us to take advantage of the convenience that _strongly types views_ can offer.   
+
+__Adding Dependency Injection__  
+The MVC framework has extensive support for DI, most usefully through the _IDependencyResolver_ interface.    
+We create a _dependency resolver_ by implementing the _IDependencyResolver_ interface and then register it with the MVC framework.  The MVC framework will call one of the methods in our dependency resolver every time that it needs to create a new object.  
+The MVC framework differentiates between _single registered services_ and _multiple registered services_.  _Single registered service_ have a single class responsible for performing an action, while _multiple registered services_ can have multiple classes , each of which will perform the same action in turn. Controllers are examples of singly registered services. This is because there is only one type that can be used to service a request. Multiple registered services are typically used when there are multiple implementations of the same interface or abstract class.
+
+When the MVC framework want s to create a new instance of a singly registered service, it calls the _GetService_ method, passing in the type that it want to instantiate.   
+
+After creating an implementation for the _IDependencyREsolver_ interface which will act as the dependency resolver, you must register is at the _Applcation_Start_ method of the _Global_ application class.
+
+__Using Dependency Injection Container__  
+We need a _dependency injection controller_ to make a more flexible and general solution. You are may DI containers available, including, _Ninject_ and _Unity_.   
+The first step is to add a reference to the _Ninject_ assembly.  
+See [Ninject.org](ninject.org) to learn more.   
+
+### Chapter 24: Implementing a Persistent Repository  
 
 
 ## PART V: Wrapping Up

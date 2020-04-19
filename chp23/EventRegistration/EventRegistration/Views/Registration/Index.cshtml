@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+}
+<style type="text/css">
+    td[colspan] {
+        text-align: center;
+    }
+</style>
+<h4>Registration</h4>
+
+@using(Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>@Html.Editor("Name")</td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td>@Html.Editor("Age")</td>
+        </tr>
+        <tr>
+            <td>City:</td>
+            <td>@Html.Editor("HomeCity")</td>
+        </tr>
+        <tr>
+            <td>Competition:</td>
+            <td>@Html.DropDownList("Competition", new SelectList(ViewBag.Competitions))</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Register" />
+            </td>
+        </tr>
+    </table>
+}
+
