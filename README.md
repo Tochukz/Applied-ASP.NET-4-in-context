@@ -377,6 +377,8 @@ See [Ninject.org](ninject.org) to learn more.
 
 ### Chapter 24: Implementing a Persistent Repository  
 
+### Chapter 25: Working with Views  
+
 
 ## PART V: Wrapping Up
 
