@@ -1,0 +1,71 @@
+﻿@model EventRegistration.Models.Domain.Registration
+
+@{
+    ViewBag.Title = "Registration Complete";
+}
+
+<h3>Registration Complete</h3>
+<p>
+    @Model.Name  has registered for the @Model.Competition.Name  which will be held in 
+    @Model.Competition.Location on @Model.Competition.Date.ToShortDateString()
+</p>
+<div>
+    <h4>Registration</h4>
+    <hr />
+    <table>
+        <tr>
+            <th colspan="2">
+                <h3>Summary</h3>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <strong>@Html.DisplayNameFor(model => model.Name)</strong>
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>@Html.DisplayNameFor(model => model.HomeCity)</strong>
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.HomeCity)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>@Html.DisplayNameFor(model => model.Age)</strong>
+            </td>
+
+            <td>
+                @Html.DisplayFor(model => model.Age)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Competition Name</strong>
+            </td>
+            <td>@Html.DisplayFor(m => m.Competition.Name)</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Competition City</strong>
+            </td>
+            <td>@Html.DisplayFor(m  => m.Competition.Location)</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Competition Date</strong>
+            </td>
+            <td>@Model.Competition.Date.ToShortDateString()</td>
+        </tr>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

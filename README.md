@@ -378,6 +378,88 @@ See [Ninject.org](ninject.org) to learn more.
 ### Chapter 24: Implementing a Persistent Repository  
 
 ### Chapter 25: Working with Views  
+Views that use the ASPX view engine are not Web Forms pages. They are MVC views that use the `<%` and `%>` tags.  For example, calling an HTML helper with traditional tags (`<% Html.DisplayFor(e => e.Name) %>`) is similar to performing the same task using Razor (`@Html.DisplayFor(e => e.Name)`).
+
+__Working with the Model Object__
+We can tell _Razor_ to look for classes in additional namespaces by editing the _~/Views/Web.config_ file. The _Web.config_ file configures Razor, and we can extend the set of places it looks for classes by adding items to the _namespaces_ element. For example, adding the namespace for the Model `EventRegistration.Models.Domain.Registration`:
+```
+<namespaces>
+  ...
+  <add namespace="EventRegistration.Models.Domain.Registration" />
+</namespaces>
+```
+This allows us to use the model in a view directly:
+```
+@model IEnumerbable<Registration>
+```
+Instead of using the fully qualified name:
+```
+@model IEnumerbable<EventRegistration.Models.Domain.Registration>
+```   
+
+__Using Dynamically Types Views__  
+With the `@model` directie in place, our view is said to be _strongly typed_. If we omit the `@model` directive, we create a _dynamically types_ view, also referred to as _weakly typed_. Omitting the `@model` directive is equivalent to using `@model dynamic`.  
+
+__Inserting Other Values__  
+We can't call methods that return `void` in view because the view inserts what the method returns into the HTML response.  
+
+__Using Razor Conditional Tags__  
+How does Razor handle content block of conditional statement?  
+```
+@if (Model.Count() == 0) {
+    <h4>There are no registrations</h4>
+}  else {
+    <h4>There are @Model.Count() registrations </h4>
+    DateTime nextMonth = DateTime.Now.AddMonths(1);
+    string nextMonthName = string.Format("{0:MMMM", nextMonth);
+    <span>Next Month will be: @nextMonthName</span>
+}
+```
+Razor processes each line in turn. If a line starts with the `<` character, Razor interprets this as a block of HTML that should be written to the output. If the line contains Razor `@` tags, then they are evaluated, and their results are inserted into the HTML as normal.
+If the line doesn’t begin with an HTML tag, then Razor assumes that it is dealing with a C# statement and tries to execute the statement. This allows us to mix and match code and HTML in a single block.  
+
+Use the `@:` tag when a line doesn't start with an HTML tag and isn't a C# statement.
+```
+@: Just a stand alone text string  
+```
+Use the `<text>` element for multiple lines that is not wrapped in an html tag and is not a C# statement.
+```
+<text>
+  Stand alone text string  
+  His name is @Model.Name
+</text>
+```
+__Lazy Loading Iteration Problem__  
+When you try to access the properties of a navigation property of an Entity framework model while iterating though a DataSet you my counter the error say 'There is already an open DataReader associated with this Command which must be closed.'  
+This problem can be solved in two ways:
+1. call the `ToArray()` method of the Data model  
+2. Add the following setting to the entity framework data base connection string:  
+```
+<add name="EFRepository" connectionString="...;MultipleActiveResultSets=true"  />
+```
+Entity framework is setup to make only one database connection at a time by default.
+`MultipleActiveResultSets=true` tell entity framework that is can make multiple connection if needed.
+Another solution could be to use `eager loading` in the EF repository implementation.  
+
+__Razor Sections__  
+A layout must render each and every section defined in a view, and each section can be rendered only once. Razor will throw an exception if you do not follow these rules.  
+
+__Razor Comments__
+If your view requires comments you may want to check if the separation of concern which the MVC design dictates is being followed properly. If you view contents so much login as to require a comment to explain it's complexity, then you should consider moving some of the logic from the view to the controller.   
+
+__Using JQuery Intellisense__  
+To enable JQuery Intellisense your view, add the `jquery-validate.vsdoc.js` script to your view  
+
+```
+ <script src="@Url.Content("~/Scripts/jquery-validate.vsdoc.js")" type="text/javascript"></script>
+```
+
+__Enabling Compile-Time Error Checking__  
+Razor views are not compiled, by default, until during run time.  To make your Razor views to be compiled with the rest of the C# code during compile time, you must update the `.csproj` file and change the inner text of the `MvcBuildViews` element from `false` to `true`.
+```
+<MvcBuildViews>true</MvcBuildViews>
+```
+Now, all views will be compiled when you build the project and any error from the view will be reported in the Error List just like errors in regular classes are.
 
 
 ## PART V: Wrapping Up

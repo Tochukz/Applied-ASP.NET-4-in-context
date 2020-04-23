@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")" type="text/javascript"></script>
+
+    <!--This script is meant to provide intellisense for jQuery-->
+    <script src="@Url.Content("~/Scripts/jquery-validate.vsdoc.js")" type="text/javascript"></script>
+
+    <style type="text/css">
+        table {
+            border: thin solid black;
+        }
+        th {
+            background-color: gray;
+            color: white;
+            padding: 5px;
+            text-align: left;
+        }
+        td {
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('tr:even').css('background-color', '#CCCCCC');
+        });
+    </script>
+</head>
+<body>
+    <div>
+        @RenderSection("Header")
+        <hr />
+        @RenderBody();
+        <hr />
+        @RenderSection("Footer")
+    </div>
+</body>
+</html>

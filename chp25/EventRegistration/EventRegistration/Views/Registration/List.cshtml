@@ -1,0 +1,136 @@
+﻿@model IEnumerable<EventRegistration.Models.Domain.Registration>
+
+@{
+    ViewBag.Title = "List";
+    /* This Custom layout if used, will override the default layout defined in _viewStart.cshtml */
+    Layout = "~/Views/Shared/CustomLayout.cshtml";
+}
+
+@section Header {
+    <h2>List</h2>
+    <h4> There are @Model.Count() registrations </h4>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+    @if (Model.Count() == 0) {
+        <h4>There are no registrations</h4>
+    } else if (Model.Count() == 1) {
+        <h4>There is one registration </h4>
+    } else {
+        <h4>There are @Model.Count() registrations </h4>
+        DateTime nextMonth = DateTime.Now.AddMonths(1);
+        string nextMonthName = string.Format("{0:MMMM}", nextMonth);
+        <span>Next Month will be: @nextMonthName</span>
+    }
+}
+
+@** Inline Helper *@
+@helper CreateOrdinal(int index) { 
+    switch(index.ToString().Last())
+    {
+        case '1':  
+            @(index + "st");
+            break;
+        case '2':
+            @(index + "nd");
+            break;
+        case '3': 
+            @(index + "rd");
+            break;
+        default: 
+            @(index + "th");
+            break;
+     }
+}
+
+
+    <h4>
+    @switch (Model.Count())
+    {
+        case 0:
+            @: There are no registrations
+            break;
+        case 1:
+            @: There is one registration
+            break;
+        default:
+            <text>
+               There are @Model.Count() registrations;
+               The first of them is for @Model.First().Name  at 
+               the @Model.First().Competition.Name  event.
+            </text>
+            break;
+
+    }
+</h4>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Home City</th>
+        <th>Event</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td> @item.Name  </td>
+        <td> @item.Age  </td>
+        <td> @item.HomeCity </td>
+        <td> @item.Competition.Name </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+</table>
+<table class="table">
+    <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Home City</th>
+        <th>Event</th>
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++) {
+        <!-- This is inefficent as the query will run for all the iterations of the loop -->
+        var item = Model.Skip(i).First();
+        @Html.Partial("RegistrationTableRow", item);
+    }
+</table>
+
+<table class="table">
+    <!-- Using a code block-->
+    @{
+        string label = "Index";
+        string label2 = "Event";
+    }
+    <tr>
+        <th>@label</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Home City</th>
+        <th>@label2</th>
+    </tr>
+    @{
+        var regArray = Model.ToArray();
+        int itemCount = regArray.Length;
+        for (int i = 0; i < itemCount; i++)
+        {
+            <tr>
+                <td>@CreateOrdinal(i + 1)</td>
+                <td>@regArray[i].Name</td>
+                <td>@regArray[i].Age</td>
+                <td>@regArray[i].HomeCity</td>
+                <td>@regArray[i].Competition.Name</td>
+            </tr>
+        }
+    }
+</table>
+@section Footer {
+    <h6>This page was rendered at: @ViewBag.Time </h6>
+    <h6>This page was rendered at : @string.Format("{0:t}", ViewBag.Time) </h6>
+}
