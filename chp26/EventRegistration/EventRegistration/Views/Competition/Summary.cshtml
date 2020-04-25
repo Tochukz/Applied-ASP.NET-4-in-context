@@ -1,0 +1,55 @@
+﻿@model EventRegistration.Models.View.CompetitionSummary
+
+@{
+    ViewBag.Title = "Summary";
+}
+
+<style type="text/css">
+    td { padding: 5px}
+    th { text-align: left}
+</style>
+
+<table class="table">
+    <tr>
+        <th>Label</th>
+        <th>Display</th>
+        <th>Editor</th>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(model => model.Name)</td>
+        <td>@Html.DisplayFor(model => model.Name)</td>
+        <td>@Html.EditorFor(model => model.Name)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(model => model.City)</td>
+        <td>@Html.DisplayFor(model => model.City)</td>
+        <td>@Html.EditorFor(model => model.City)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(model => model.Date)</td>
+        <td>@Html.DisplayFor(model => model.Date)</td>
+        <td>@Html.EditorFor(model => model.Date)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(model => model.Approved)</td>
+        <td>@Html.DisplayFor(model => model.Approved)</td>
+        <td>@Html.EditorFor(model => model.Approved)</td>
+    </tr>
+    <tr>
+        <td>@Html.LabelFor(model => model.Start)</td>
+        <td>@Html.DisplayFor(model => model.Start)</td>
+        <td>@Html.EditorFor(model => model.Start)</td>
+    </tr>
+</table>
+
+@* Using custom template *@
+<div>
+    <p>Custom template</p>
+    <p>
+        @* Here city makes reference to the custom template helper defined in ~/Views/Shares/EditorTemplates/City.cshtml *@
+        @Html.DisplayFor(model => model.City, "City")
+    </p>
+    <p>
+        @Html.EditorFor(model => model.City, "City");
+    </p>
+</div>

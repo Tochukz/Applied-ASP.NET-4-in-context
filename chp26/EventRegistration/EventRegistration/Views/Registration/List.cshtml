@@ -1,0 +1,28 @@
+﻿@model IEnumerable<EventRegistration.Models.Domain.Registration>
+@using EventRegistration.Infrastructure
+@{
+    ViewBag.Title = "List";
+}
+
+@* RegistrationCount() is a custom external helper defined in EventRegistration.Infrastructure.ExternalHelpers
+   A custom helper is an extension method that operates on System.Web.Mvc.HtmlHelper class
+ *@
+<h4>@Html.RegistrationCount(@Model.Count())</h4>
+@Html.RegistrationCountHtml(@Model.Count())
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Home City</th>
+        <th>Event</th>
+    </tr>
+    @foreach(var item in Model.ToArray())
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Age</td>
+            <td>@item.HomeCity</td>
+            <td>@item.Competition.EventType</td>
+        </tr>
+    }
+</table>

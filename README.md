@@ -461,6 +461,190 @@ Razor views are not compiled, by default, until during run time.  To make your R
 ```
 Now, all views will be compiled when you build the project and any error from the view will be reported in the Error List just like errors in regular classes are.
 
+### Chapter 26: Using HTML Helpers and Templates
+__Creating an External Helper Method__  
+An external helper takes the form of a C# extension method that operates on the _Sysyte.Web.Mvc.HtmlHelper_ class.
+The MVC framework encodes the values it gets from helper methods to make them safe to display.   
+Be careful when rendering unencoded content. Even though it might come from a trusted source today, future changes to your application can create an XSS(cross=site scripting) vulnerability.  
+
+To return an unencoded HTML from your custom helper method, you must return a type of _MvcHtmlString_  
+
+__Creating Form__  
+The _Html.BeginForm_ tag will post the form back to the action method where it came from by default. Another overload method accepts parameter for a target action method and controller.  
+```
+@using(Html.BeginForm("MyAction", "MyController")) {
+  ...
+}
+```  
+
+__Using the Input Helper Methods__    
+List of input helpers:
+```
+@Html.CheckBox("idAndName", boolValue);
+@Html.Hidden("idAndName", "value")
+@Html.RadioButton("idAndName", "value", checkedBoolValue)
+@Html.Password("idAndName", "value")
+@Html.TextArea("idAndName", "value", nRows, nCols, null)
+@Html.TextBox("idAndName", "value")
+```  
+The _@Html.CheckBox()_ helper generates two _input_ elements using the same name, one of type `checkbox` and the second of type `hidden`. This is because browsers don't submit a value for checkbox when they are not selected. The additional `hidden` input element ensures that the MVC framework gets a value from the hidden field when this happens.
+
+__Defining HTML Attributes__  
+Most input helper method have an overload that takes an object as a parameter. This can be used to define attributes for the input element.   
+```
+@Html.TextBox("username", "John", new {
+  @class = "form-control"  ,
+  placeholder = "Enter your name"
+})
+```
+__Inserting Data Values__  
+If you use only the first argument for an input helper method for example  
+```
+@Html.TextBox("Name")
+```
+The helper will look for a value for `Name` property, to use as the second argument, in the following places:
+* ViewBag.Name  
+* ViewData["Name"]
+* @Model.Name
+
+__Using the Strongly Types Input Helper Methods__   
+Strongly typed helpers can only be used in strongly typed views. They use the lambda expression and the value passed is the view model object. Each of the basic helper have a corresponding strongly typed helper as shown below.
+```
+@Html.CheckBoxFor(model => model.IsApproved)
+@Html.HiddenFor(model => model.UserID)
+@Html.RadioButtonFor(model => model.IaApproved, "value")
+@Html.PasswordFor(model => model.Password)
+@Html.TextAreaFor(model => model.Message, nCols, nRows, new {})
+@Html.TextBox(model => model.Name)
+```  
+Strongly types input helper will take care of the name, id and value attribute of the input element generated.  
+
+__Creating select Elements__   
+Basic select helpers  
+```
+@Html.DropDownList("gender", new SelectList(new [] {"Male", "Female"}), "Empty")
+@Html.ListBox("language", new MultiSelectList(new [] {"English", "French", "German"}))
+```
+Strongly types select helpers  
+```
+@Html.DropDownListFor(model => model.Gender, new SelectList(new [] {"Male", "Female"}))
+@Html.ListBoxFor(model => model.Language, new MultiSelectList(new [] {"English", "French", "German"}))
+```  
+You can use either the _SelectList_ or _MultiSelectList_ constructor to select properties from a model   
+```
+@model IEnumerable<Category>
+
+@Html.DropDownList("Category", new SelectList(Model, "ID", "Name"))
+```  
+This will product a list of `<option>`s whose value and label are the `ID` and `Name` properties respectively from the objects of the model collection.  
+
+__Using the Templated Helper Methods__   
+Templated helpers determine what HTML element it should use based on the item passed to it.
+```
+@Html.Display("Name")
+@Html.DisplayFor(model => model.Name)
+
+@Html.Editor("Name")
+@Html.EditorFor(model => model.Name)
+
+@Html.Label("Name")
+@Html.LabelFor(model => model.Name)  
+```
+You can also hint on what HTML element it should use by annotating the property of the relevant view model using the `UIHint` attribute. Alternately, you can pass the name of a custom partial view defined in the _EditorTemplates_ or _DisplayTemplate_ folder inside the _Shared_ folder.
+
+__Using Metadata Formatting__    
+The `DataType` attribute is used to format the displayed property of a View Model. It takes a value of the `DataType` enumeration as parameter.
+
+```
+using System.ComponentNodel.DataAnnnotation;
+...
+  [DataType(DataType.Date)]
+  public DateTime Date { get; set}
+```
+The annotated property of the View Model is usually used in conjunction with the templated helper e.g `@Html.Display()`.
+
+The `DataType` enumeration contains a wide range of formatting options.  
+```
+DataType.Date
+DataType.DateTime
+DataType.Time  
+DataType.Text  
+DataType.MultilineText
+DataType.Password
+DataType.Url
+DataType.EmailAddress
+```
+Note that applying the `DataType` attribute only formats the data. No checks are made to ensure that the value is of an appropriate type.
+
+__Using Metadata to select a Template__  
+The `UIHint` attribute is used to hint which HTML element a template helper should used to display a view model's property.
+```
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotation;
+...
+  [DisplayName("Profile Message")]
+  [UIHint("MultilineText")]
+  public string ProfileMessage { get; set;}
+```  
+Here is a list of valid argument to generate templates for the `UIHint` attribute:  
+```
+Boolean
+Collection
+Decimal
+EmailAddress
+Html
+MultilineText
+Password
+String
+Text
+Url
+```
+These are the built-in helper templates.   
+
+__Using Metadata to Control Visibility and Editing__    
+Use the `HiddenInput` attribute to hide properties:   
+```
+using System.Web.Mvc;
+...
+  [HiddenInput(DisplayValue=false)]
+  public bool Approved { get; set;}
+```
+You can use `DisplayValue=true` or `DisplayValue=false` as argument to the `HiddenInput` attribute.  
+
+__Creating a Custom Editor Template__  
+You must create a folder called _EditorTemplates_ in the _~/Views/Shared_ folder. This is where the `EditorFor` helper looks for templates. Assuming the custom template was defined in _~/Views/Shared/EditorTEmplates/Categories.cshtml_, then we can use the `UIHint` attribute tp specify the custom template as our required UI for a specific property in a view model.   
+```
+using System.ComponentModel.DataAnnotation;
+...  
+  [UIHint("Categories")]
+  public string Category {get; set;}
+```
+Alternately, we can specify the template to use directly in a template helper method like this:  
+```
+@Html.DisplayFor(model => model.Category, "Categories")
+```
+Here the second argument represents the name of the template to use.
+
+__Creating a Custom Display Template__
+Custom display templates a created in a similar way to custom editor template. They must be defined as partial view in the `~/Views/Shared/DisplayTemplates` folder.   
+They can have the same name as a corresponding editor template which takes advantage of the `UIHint` attribute.  
+
+__Creating a Type-Specific Template__  
+If we create a custom template that has the name of a .NET type, then the templated helpers will use that template to render any property of that type they encounter. We can use this strategy to even override built-in template, although not recommended.
+
+__Using the Whole-Model Templated Helper Methods__  
+They operate on the whole view model and there a three of them:
+```
+@Html.DisplayForModel()
+@Html.EditorForModel()
+@Html.LabelForModel()
+```
+Rather than having to invoke helpers on each individual member, we can just work with the entire model. These helpers becomes more useful when we define custom templates for the view model property or the view model type itself.  
+
+
+### Chapter 27: Using Routing and areas
+
+
 
 ## PART V: Wrapping Up
 
