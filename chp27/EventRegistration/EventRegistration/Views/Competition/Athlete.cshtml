@@ -1,0 +1,38 @@
+﻿@model EventRegistration.Models.View.AthleteDetails
+
+@{
+    ViewBag.Title = "Athlete";
+}
+
+<h2>Athlete</h2>
+@*
+<h4>AthleteDetails</h4>
+<table>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Name)</td>
+        <td> @Html.DisplayFor(model => model.Name)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.City)</td>
+        <td>@Html.DisplayFor(model => model.City)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(model => model.Age)</td>
+        <td> @Html.DisplayFor(model => model.Age)</td>
+    </tr>
+</table>
+ *@      
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Using the Complete Model Helpers</h3>
+    </div>
+    <div class="col-sm-4">
+        @Html.EditorForModel()
+    </div>
+    <div class="col-sm-4">
+        @Html.DisplayForModel()
+     </div>
+    <div class="col-sm-4">
+        @Html.LabelForModel()
+    </div>
+</div>

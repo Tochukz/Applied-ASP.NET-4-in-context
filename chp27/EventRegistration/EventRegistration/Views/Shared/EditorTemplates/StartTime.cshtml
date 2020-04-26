@@ -1,0 +1,9 @@
+﻿@model EventRegistration.Models.View.StartTime 
+
+@Html.DropDownListFor(prop => prop,  new SelectList(Enum.GetValues(Model.GetType()), Model))
+
+@*
+  This is a type-specify custom template 
+  Razor will automatically use this template to render the StartTime property anytime it encouters it.
+  You don't need to anotate your view model with an attribute to use this, it is used automatically. 
+*@
