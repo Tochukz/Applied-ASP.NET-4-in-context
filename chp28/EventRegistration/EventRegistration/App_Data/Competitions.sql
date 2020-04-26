@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Table]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] VARCHAR(100) NOT NULL, 
+    [Location] VARCHAR(100) NOT NULL, 
+    [Date] DATE NOT NULL, 
+    [EventType] VARCHAR(100) NOT NULL
+)

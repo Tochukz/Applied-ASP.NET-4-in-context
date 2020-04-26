@@ -642,7 +642,7 @@ They operate on the whole view model and there a three of them:
 Rather than having to invoke helpers on each individual member, we can just work with the entire model. These helpers becomes more useful when we define custom templates for the view model property or the view model type itself.  
 
 
-### Chapter 27: Using Routing and areas
+### Chapter 27: Using Routing and Areas
 Routing is optional in _WebForm_ application but it is not for _MVC Framework_ applications.  MVC Framework routes are defined in the _Global.asax_ file but they use a slightly different format from the ones for _WebForm_.
 
 __Generating Outgoing URLs__  
@@ -705,7 +705,7 @@ routes.MapRoute(
     new string[] {"AppNameSpace.Controllers"}
 );
 ```  
-The fourth argument tells the router that priority should be given to controllers defined in the _AppNameSpace.Controllers_ namespace.  
+The fifth argument tells the router that priority should be given to controllers defined in the _AppNameSpace.Controllers_ namespace.  
 
 __Using Areas__   
 The MVC framework supports organizing a web application into areas, where each area represents a functional segment of the application, such as administration, billing, customer support, and so on.
@@ -729,7 +729,43 @@ If we want to link to an action on one of the top-level controllers (a controlle
 ```
 
 ### Chapter 28: Working with Action Methods  
+__Rendering a View__  
+We can specify the layout that should be used with the view, overriding the value of the _Layout_ property in the view of the *_ViewStart.cshtml* file.   
+```
+return View("MyView", "MyLayout", DataObject);
+return View("MyView", "MyLayout");  
+```
 
+__Performing a Redirection__  
+Redirection are commonly performed to follow a pattern called _post/redirect/get_. This is done to prevent the user from mistakenly resubmit a form by reloading the page.
+There are tow kinds if redirect:  
+1. _Temporary redirect_, send HTTP status code of 302
+2. _Permanent redirect_, send HTTP status code of 301
+Permanent redirect tells recipient not request the original URL ever again. It should be used with caution. For most situations, a temporary redirect is more suitable.
+
+__Using Child Actions__  
+Child actions are action methods that we invoke from within a view. A child action usually returns a partial view and is suitable for displaying dynamic widgets. Example
+```
+using System.Web.Mvc;
+...
+[ChildActionOnly]
+public PartialViewResult Footer(DateTime dateTime) {
+  ...
+  return PartialView(modelObject)
+}
+```
+The `ChildActionOnly` attribute is optional and serves only to prevent the child action from being invoked like a regular action as a result of user request.    
+The view associated with a child action is usually a partial view but not compulsorily so.  
+To invoke the child action in a view you use the `Action` helper  
+```
+@Html.Action("ChildActionName")
+@Html.Action("ChildActionName", "ControllerName")
+@Html.Action("Footer", new { time = DateTime.Now})
+```
+The view or partial view associated with the child action will be returned where the `Action` helper method was called.
+
+
+### Chapter 29: Working with Model Binding and Validation  
 
 ## PART V: Wrapping Up
 

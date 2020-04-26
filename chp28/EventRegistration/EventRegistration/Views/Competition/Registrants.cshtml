@@ -1,0 +1,30 @@
+﻿@model IEnumerable<EventRegistration.Models.View.CompetitionNames>
+
+@{
+    ViewBag.Title = "Registrants";
+}
+
+<h2>Registrants</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Event Name</th>
+        <th>Registrant Names</th>
+        <th>Count</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+        <td>@string.Join(",", item.RegistrantNames)</td>
+        <td>@item.RegistrantNames.Count()</td>
+    </tr>
+}
+</table>
+<p>Page rendered at @ViewBag.Time</p>
+
+@Html.Action("Footer")
+
