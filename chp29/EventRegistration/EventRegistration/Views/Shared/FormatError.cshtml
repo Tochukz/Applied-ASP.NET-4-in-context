@@ -1,0 +1,49 @@
+﻿@model HandleErrorInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FormatError</title>
+    <style type="text/css">
+        table {
+            border: thin solid black;
+        }
+
+        th {
+            background-color: grey;
+            color: white;
+            padding: 5px;
+            text-align: left;
+        }
+
+        td {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Format Error</h2>
+        <table>
+            <tr>
+                <th>Controller</th>
+                <td>@Model.ControllerName</td>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td>@Model.ActionName</td>
+            </tr>
+            <tr>   
+                <th>Message</th>
+                <td>@Model.Exception.Message</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -766,6 +766,77 @@ The view or partial view associated with the child action will be returned where
 
 
 ### Chapter 29: Working with Model Binding and Validation  
+__Handle Form POST with Basic Binding__  
+When a form in posted with an input element of `<input name="Profile" />`, the MVC framework will automatically pass it to you action method:   
+```
+[HttpPost]
+public ActionResult Register(string profile)
+{
+  User user = new User { Profile = profile};
+  return View();
+}
+```
+The MVC framework will look for the _profile_ value in the following places:  
+```
+Request.Form["profile"]
+RouteData.Values["profile"]
+Request.QueryString["profile"]
+Request.Files["profile"]
+```
+Note that the parameter of the action method is case-insensitive, so _profile_ and _Profile_ will give you the same result.
+
+__Using Validation Helpers__
+You can have this at the top of before the form.  
+```
+@ValidationSummary("Please fix the following errors");
+```
+And then right below each form field:
+```
+@Html.ValidationMessageFor(x => x.FieldName)
+```
+Or you can use the weakly typed equaivalent
+```
+@Html.ValidationMessage("Fields is required and must be n length")
+```  
+
+__Defining Validation Rules Using Metadata__  
+Useful attributes for model property validation  
+```
+[Compare("SecondPassword")]
+[Range(10,  20)]
+[Range(int.MinValue, 50)]
+[RegularExpression("pattern")]
+[Required]
+[Required(AllowEmptyString = true)]
+[StringLength(10)]
+[StringLength(10, MinimumLength=2)]
+```  
+Not that for `[RegularExpression]`, the pattern must match the entire user-supplied value, not just a substring wihtin it.   
+For `[StringLength(10)]`, the string must not be longer than 10 characters.  
+To override the default error message for a given validation attribute  
+```
+[Required(ErrorMessage="Please enter a name")]
+```
+
+__Using Client-Side Validation__  
+The clide-side validation is controlled by two settings in the `Web.config` file
+```
+<configuration>
+  <appSettings>
+    <add key="ClientValidationEnabled" value="true"/>
+    <add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+  </appSettings
+ ...
+```  
+In addition to the configuration settings, the following Javascript library must be included on the page that requires validation or better still in the *_Layout.cshtml* file
+```
+<script src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+```  
+Remember that the order of these files is significant. If the order is changed the client validation may not work.
+
+The _unobstrusive_ validation support works on the HTML that is emitted as a consequence of applying validation attribute to the view model properties. The _data-attribute_ that is appended to the generated input element are used for the validation by the Javascript libraries.  
 
 ## PART V: Wrapping Up
 
