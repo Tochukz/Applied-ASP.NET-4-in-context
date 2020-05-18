@@ -1,0 +1,10 @@
+﻿
+@model DateTime  
+
+<table class="table">
+    <tr>
+        <td>Page rendered at @Model.ToShortTimeString()</td>
+        <td>@Html.ActionLink((int)ViewBag.CompCount + " competitions", "Index")</td>
+        <td>@Html.ActionLink((int)ViewBag.RegCount + " registrations", "List", "Registration" )</td>
+    </tr>
+</table>

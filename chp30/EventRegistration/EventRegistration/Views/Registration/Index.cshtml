@@ -1,0 +1,46 @@
+﻿@model EventRegistration.Models.Domain.Registration
+@{
+    ViewBag.Title = "Registration";
+}
+<style type="text/css">
+    td[colspan] {
+        text-align: center;
+    }
+</style>
+<h4>Registration</h4>
+@*@Html.ValidationSummary("Please fix the follwing errors:")*@
+
+<!--This will show only model-level errors messages while the above includes property-level errors messages-->
+@Html.ValidationSummary(true, "Please fix the follwing errors:")
+
+@using (Html.BeginForm("HandleIndexPost", "Registration"))
+{@Html.HiddenFor(x => x.ID)
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>@Html.EditorFor(x => x.Name)</td>
+        <td>@Html.ValidationMessageFor(x => x.Name)</td>
+    </tr>
+    <tr>
+        <td>Age:</td>
+        <td>@Html.TextBox("Age", Model.Age == 0 ? " " : Model.Age.ToString())</td>
+        <td>@Html.ValidationMessageFor(x => x.Age)</td>
+    </tr>
+    <tr>
+        <td>City:</td>
+        <td>@Html.EditorFor(x => x.HomeCity)</td>
+        <td>@Html.ValidationMessageFor(x => x.HomeCity)</td>
+    </tr>
+    <tr>
+        <td>Competition:</td>
+        <td>@Html.DropDownListFor(x => x.CompetitionID, new SelectList(ViewBag.Competitions, "ID", "Name"))</td>
+        <td>@Html.ValidationMessageFor(x => x.CompetitionID)</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Register" />
+        </td>
+    </tr>
+</table>
+}
+

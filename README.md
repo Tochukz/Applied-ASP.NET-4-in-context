@@ -838,6 +838,31 @@ Remember that the order of these files is significant. If the order is changed t
 
 The _unobstrusive_ validation support works on the HTML that is emitted as a consequence of applying validation attribute to the view model properties. The _data-attribute_ that is appended to the generated input element are used for the validation by the Javascript libraries.  
 
+
+### Chapter 30: Using Unobtrusive Ajax
+To enable _Unobstrusive Ajax_ first, set the value of __UnobstrusiveJavaScriptEnabled__ to ture in _Web.config_  
+```
+<configuration>
+  <appSettings>
+    <add key="ClientValidationEnabled" value="true"/>
+    <add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+  </appSettings>
+...
+```
+next, place the script references in the views where we need to use _Ajax_ preferable in *_Layout.cshtml*.   
+```
+<script src="@Url.Content("~/Scripts/jquery-1.5.1.min.js")" ></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")"></script>
+```  
+_jquery.unobtrusive-ajax.js_ is the MVC-specific wrapper around jQuery that provides the
+unobtrusive Ajax support.  
+If you project template does not have _jquery.unobtrusive-ajax.js_, you can install it using the _Nuget package manager_.  
+
+
+To continue from: Page 733: Performing Graceful Degradation
+
+
+
 ## PART V: Wrapping Up
 
 ### Chapter 32: Preparing a Server for Deployment

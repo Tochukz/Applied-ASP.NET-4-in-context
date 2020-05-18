@@ -1,0 +1,20 @@
+﻿@model string
+
+@{
+    ViewBag.Title = Model + "Report";
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = "datatable",
+        Url = Url.Action("RegistrationTable")
+    };
+}
+
+<h2>@Model</h2>
+
+@using(Ajax.BeginForm("Index", ajaxOptions))
+{
+    @Html.DropDownList("competition", new SelectList(ViewBag.CompetitionNames, Model)) 
+    <input type="submit" value="Show Report" />
+}
+<p> &nbsp; </p>
+@Html.Action("RegistrationTable", new {  competition = Model })

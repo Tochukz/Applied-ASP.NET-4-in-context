@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EventRegistration.Models.Domain.Competition>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Date</th>
+        <th>Event Type</th>
+        <th>Registrations</th>
+    </tr>
+    @foreach (var item in Model.ToArray())
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Location</td>
+            <td>@item.Date.ToShortDateString()</td>
+            <td>@item.EventType</td>
+            <td>@item.Registrations.Count()</td>
+        </tr>
+    }
+</table>

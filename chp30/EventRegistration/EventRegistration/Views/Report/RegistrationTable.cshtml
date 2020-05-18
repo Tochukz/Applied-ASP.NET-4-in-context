@@ -1,0 +1,20 @@
+﻿
+@model IEnumerable<EventRegistration.Models.Domain.Registration>  
+
+<table id="datatable">
+    <tr>
+        <th>Name</th>
+        <th>Home City</th>
+        <th>Age</th>
+        <th>Competition</th>
+    </tr>
+    @foreach(var reg in Model)
+    {
+        <tr>
+            <td>@reg.Name</td>
+            <td>@reg.HomeCity</td>
+            <td>@reg.Age</td>
+            <td>@reg.Competition.Name</td>
+        </tr>
+    }
+</table>
