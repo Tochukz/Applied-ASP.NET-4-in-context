@@ -335,7 +335,7 @@ There are three categories of data-bound controls:
 ### Chapter 20: Using the Rich Data Controls  
 
 __Using the ListView Control__  
-All that is required is an _ItemTemplate_, all other template of the_ListView_ is optional. But the real value of the _ListView_ control is in how it templates work together. If you just want a simple list, use easier controls such as the _DataList_ control.  
+All that is required is an _ItemTemplate_, all other template of the _ListView_ is optional. But the real value of the _ListView_ control is in how it templates work together. If you just want a simple list, use easier controls such as the _DataList_ control.  
 
 ## PART IV: Using the MVC Framework
 
