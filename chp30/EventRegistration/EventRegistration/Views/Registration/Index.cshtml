@@ -8,10 +8,10 @@
     }
 </style>
 <h4>Registration</h4>
-@*@Html.ValidationSummary("Please fix the follwing errors:")*@
+@*@Html.ValidationSummary("Please fix the following errors:")*@
 
 <!--This will show only model-level errors messages while the above includes property-level errors messages-->
-@Html.ValidationSummary(true, "Please fix the follwing errors:")
+@Html.ValidationSummary(true, "Please fix the following errors:")
 
 @using (Html.BeginForm("HandleIndexPost", "Registration"))
 {@Html.HiddenFor(x => x.ID)
@@ -43,4 +43,3 @@
     </tr>
 </table>
 }
-
