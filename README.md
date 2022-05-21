@@ -366,9 +366,9 @@ The MVC framework has extensive support for DI, most usefully through the _IDepe
 We create a _dependency resolver_ by implementing the _IDependencyResolver_ interface and then register it with the MVC framework.  The MVC framework will call one of the methods in our dependency resolver every time that it needs to create a new object.  
 The MVC framework differentiates between _single registered services_ and _multiple registered services_.  _Single registered service_ have a single class responsible for performing an action, while _multiple registered services_ can have multiple classes , each of which will perform the same action in turn. Controllers are examples of singly registered services. This is because there is only one type that can be used to service a request. Multiple registered services are typically used when there are multiple implementations of the same interface or abstract class.
 
-When the MVC framework want s to create a new instance of a singly registered service, it calls the _GetService_ method, passing in the type that it want to instantiate.   
+When the MVC framework wants to create a new instance of a singly registered service, it calls the _GetService_ method, passing in the type that it want to instantiate.   
 
-After creating an implementation for the _IDependencyREsolver_ interface which will act as the dependency resolver, you must register is at the _Applcation_Start_ method of the _Global_ application class.
+After creating an implementation for the _IDependencyResolver_ interface which will act as the dependency resolver, you must register is at the _Applcation_Start_ method of the _Global_ application class.
 
 __Using Dependency Injection Container__  
 We need a _dependency injection controller_ to make a more flexible and general solution. You are may DI containers available, including, _Ninject_ and _Unity_.   
@@ -937,9 +937,11 @@ _Form Authentication_ is ideally suited for internet-facing applications.
 
 __Using Form Authentication__   
 The security of Forms Authentication relies on an encrypted browser cookie called _.ASPXAUTH__.  
-Using _FormsAuthentication.Decrypt_ to decrypt the cookie returns a _FormAuthenticationTicket_ object.  
+Using _FormsAuthentication.Decrypt_ to decrypt the cookie returns a _FormAuthenticationTicket_ object.    
 
-__NB:__ When deploying an application that uses _Forms Authentication_ to a farm of servers, we must either ensure that requests always go back to the server that generated the cookie (known as _affinity_) or ensure that all of the server have the same machine keys. Keys can be generated and configured using the Machine Keys option n IIS Manager (the icon is in the ASP.NET section).   
+The key property encoded in the cookie is _Name_. This is the identity that will be associated with the requests that the user makes. The security of this system comes from the fact that the cookie data is encrypted and signed using our server’s `machine keys`. These are generated automatically by IIS, and without these keys, the authentication information contained in the cookie cannot be read or modified.
+
+__NB:__ When deploying an application that uses _Forms Authentication_ to a farm of servers, we must either ensure that requests always go back to the server that generated the cookie (known as _affinity_) or ensure that all of the server have the same machine keys. Keys can be generated and configured using the Machine Keys option in IIS Manager (the icon is in the ASP.NET section).   
 
 Enabling Forms Authentication in _Web.Config_  
 ```
@@ -972,6 +974,24 @@ For custom Authentication take a look at the articles:
 * [Article 2](http://rahulrajatsingh.com/2014/06/understanding-and-implementing-asp-net-custom-forms-authentication/)
 * [Article 3](http://rahulrajatsingh.com/2014/11/a-beginners-tutorial-on-custom-forms-authentication-in-asp-net-mvc-application/)  
 
+#### JWT Authentication
+__Steps to implement JWT Authentication is ASP.NET MVC 4__  
+1. Install `System.IdentityModel.Tokens.Jwt` package. The package will be used to sign tokens and verify tokens.
+2. Create a custom authorization attribute, I called mine `AppAuthorization`. Your attribute should extends `System.Web.Mvc.AuthorizeAttribute` and override it's `AuthorizeCore` and `HandleUnauthorizedRequest` methods.  
+ The `AuthorizeCore` method does the check while the `HandleUnauthorizedRequest` method handles failure that may result from the check. See [system.web.mvc.authorizeattribute](https://docs.microsoft.com/en-us/dotnet/api/system.web.mvc.authorizeattribute?view=aspnet-mvc-5.2)
+3. Decorate the class or method that need to be protected using your custom attribute
+```
+[AppAuthorization]
+public class PatientController : Controller
+{
+    ...
+}
+```
+4. Implement a method that will Authenticate a user, when given their credentials, and issue a token if they pass. I usually do this in an `AuthService` class.   
+You will use classes in the `System.IdentityModel.Tokens.Jwt` namespace to generate the token.  
+5. Implement the `Application_AuthenticateRequest` event method in `Global.aspx`. In this method, you will check all incoming request for Authorization token.   
+If they have a token you will validate the token using classes in the `System.IdentityModel.Tokens.Jwt`.    
+If their token is valid then you add an object to the `Items` collection of the `HttpContext.Current` object. The object added will be used to identify the user inside of the `AuthorizeCore` method of your authorization attribute. You can also use the object inside of any controller action.     
 
 ## Simple Apps  
 ### Email App  
