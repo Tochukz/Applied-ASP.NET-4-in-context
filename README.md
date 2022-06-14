@@ -148,7 +148,7 @@ __Setting a Programmatic breakpoint__
 The ability to break the debugger comes with the _System.Diagnostics.Debugger_ class which includes the _Break_ method.
 
 ### Chapter 8: Working with Data   
-__Creating an Entity Framework Data Model__
+__Creating an Entity Framework Data Model__   
 1. Right click on your project > `Add` > `New Item`
 2. Select _Data_ category on the left and select the _ADO.NET
 Entity Data Model_ template on the right.
@@ -996,3 +996,6 @@ If their token is valid then you add an object to the `Items` collection of the 
 ## Simple Apps  
 ### Email App  
 Form to mail or app useful as contact form on website contact us page.
+
+### MySQL App  
+Working with MySQL table using `MySql.Data` Nuget package. 
