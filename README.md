@@ -145,7 +145,9 @@ The trace viewer is at its most useful when you can minimize the number of reque
 directly related to your bug hunt.
 
 __Setting a Programmatic breakpoint__  
-The ability to break the debugger comes with the _System.Diagnostics.Debugger_ class which includes the _Break_ method.
+The ability to break the debugger comes with the _System.Diagnostics.Debugger_ class which includes the _Break_ method.  
+
+[Exception handling in ASP.NET MVC (6 methods explained)](https://www.codeproject.com/Articles/850062/Exception-handling-in-ASP-NET-MVC-methods-explaine)   
 
 ### Chapter 8: Working with Data   
 __Creating an Entity Framework Data Model__   
@@ -186,6 +188,15 @@ To make the imported stored procedures available for use in the application, we 
 4. Click on the _Get Column Information_ button
 5. Select a Complex type and click okay.
 6. Save all the changes
+
+__Updating the Data Model__  
+Sometimes we may need to updated the Entity model when there is a changes in the underlying database.  
+To do this:
+1. Open the `.edmx` file in design mode by either double clicking on it or right-click > open with > _ADO.NET Entity Data Model Designer_    
+2. You will see the design diagram showing the database tables and their relationships.     
+3. Right-click on the page and click _Update Model from Database..._    
+4. Select the Tables Views and Stored Procedures you want to include in your data model  
+5. Click finish.  
 
 __Managing Concurrency__  
 The Entity Framework uses an _optimistic concurrency_ model by default. In this case _optimistic_ means that we cross our finger and hope that we don't get overlapping page requests that leads to conflicting data changes.
@@ -998,4 +1009,10 @@ If their token is valid then you add an object to the `Items` collection of the 
 Form to mail or app useful as contact form on website contact us page.
 
 ### MySQL App  
-Working with MySQL table using `MySql.Data` Nuget package. 
+Working with MySQL table using [`MySql.Data`](https://www.nuget.org/packages/MySql.Data/) Nuget package.  
+[Learn More](https://dev.mysql.com/doc/connector-net/en/connector-net-programming-getschema.html)  
+
+### MySQL Web API  
+Entity framework with MySQL Data provider.  
+Nuget packages used includes [`MySql.Data.EntityFramework`](https://www.nuget.org/packages/MySql.Data.EntityFramework)
+[Learn More](https://dev.mysql.com/doc/connector-net/en/connector-net-entity-framework.html)
